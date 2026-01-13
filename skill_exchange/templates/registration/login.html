@@ -2,92 +2,84 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Login - Skills Exchange</title>
+    <title>Login | Skills Exchange</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@500&display=swap');
-
         body {
-            margin: 0;
-            padding: 0;
-            font-family: 'Baloo 2', cursive;
-            background: linear-gradient(135deg, #FFB6C1, #98FB98);
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to right, #FFC0CB, #90EE90); /* وردي و أخضر */
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
+            margin: 0;
         }
-
         .login-container {
-            background: rgba(255, 255, 255, 0.9);
-            padding: 40px 50px;
-            border-radius: 25px;
+            background-color: white;
+            padding: 40px;
+            border-radius: 20px;
             box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-            text-align: center;
             width: 350px;
+            text-align: center;
         }
-
         .login-container h1 {
+            color: #4CAF50; /* أخضر */
             margin-bottom: 30px;
-            color: #FF69B4; /* وردي فاقع */
-            text-shadow: 1px 1px #32CD32; /* أخضر لامع */
         }
-
         input[type="text"], input[type="password"] {
             width: 100%;
-            padding: 12px 15px;
-            margin: 10px 0 20px 0;
-            border: none;
-            border-radius: 12px;
-            background: #f0f0f0;
-            font-size: 16px;
-        }
-
-        input[type="submit"] {
-            width: 100%;
             padding: 12px;
-            border: none;
-            border-radius: 12px;
-            background: #32CD32; /* أخضر */
+            margin: 10px 0;
+            border-radius: 10px;
+            border: 1px solid #ccc;
+        }
+        button {
+            background-color: #FF69B4; /* وردي */
             color: white;
-            font-weight: bold;
-            font-size: 16px;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 10px;
             cursor: pointer;
-            transition: 0.3s;
+            font-size: 16px;
         }
-
-        input[type="submit"]:hover {
-            background: #FF69B4; /* وردي عند المرور */
+        button:hover {
+            background-color: #FF1493; /* وردي داكن */
         }
-
-        .links {
-            margin-top: 15px;
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: #4CAF50; /* أخضر */
+            display: flex;
+            justify-content: center;
+            padding: 10px 0;
         }
-
-        .links a {
-            color: #FF69B4;
+        .navbar a {
+            color: white;
+            margin: 0 15px;
             text-decoration: none;
-            margin: 0 10px;
             font-weight: bold;
         }
-
-        .links a:hover {
+        .navbar a:hover {
             text-decoration: underline;
         }
-
+        body > .navbar + .login-container {
+            margin-top: 70px;
+        }
     </style>
 </head>
 <body>
+    <div class="navbar">
+        <a href="{% url 'skills_home' %}">Skills Home</a>
+        <a href="{% url 'request_skill' %}">Request Skill</a>
+        <a href="/admin/">Admin</a>
+    </div>
     <div class="login-container">
-        <h1>Welcome Back!</h1>
+        <h1>Login</h1>
         <form method="post">
             {% csrf_token %}
-            <input type="text" name="username" placeholder="Username" required>
-            <input type="password" name="password" placeholder="Password" required>
-            <input type="submit" value="Login">
+            {{ form.as_p }}
+            <button type="submit">Login</button>
         </form>
-        <div class="links">
-            <a href="{% url 'skills_home' %}">Back Home</a>
-        </div>
     </div>
 </body>
 </html>
