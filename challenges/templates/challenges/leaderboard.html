@@ -1,0 +1,21 @@
+<h1>🏆 Leaderboard</h1>
+<hr>
+
+<table border="1" cellpadding="10">
+    <tr>
+        <th>Rank</th>
+        <th>User</th>
+        <th>Total Points</th>
+    </tr>
+
+    {% for user in users %}
+    <tr>
+        <td>{{ forloop.counter }}</td>
+        <td>{{ user.username }}</td>
+        <td>{{ user.total_points|default:0 }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+<br>
+<a href="{% url 'dashboard' %}">⬅ Back to Dashboard</a>

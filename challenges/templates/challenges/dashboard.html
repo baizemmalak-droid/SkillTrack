@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+</head>
+<body>
+
+<h1>Dashboard</h1>
+
+<p><strong>Total Points:</strong> {{ total_points }}</p>
+<p><strong>Completed Challenges:</strong> {{ completed_count }}</p>
+
+<hr>
+
+<h2>Challenges</h2>
+
+<ul>
+{% for challenge in challenges %}
+    <li>
+        <strong>{{ challenge.title }}</strong>
+        ({{ challenge.points }} pts)
+        <br>
+        {{ challenge.description }}
+
+        {% if challenge.id in completed_ids %}
+            ✅ Completed
+        {% else %}
+            <form method="post" action="{% url 'complete_challenge' challenge.id %}">
+                {% csrf_token %}
+                <button type="submit">Complete</button>
+            </form>
+        {% endif %}
+    </li>
+    <hr>
+{% endfor %}
+</ul>
+<a href="{% url 'leaderboard' %}">🏆 View Leaderboard</a>
+
+</body>
+</html>
+
