@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Dashboard Pro - {{ profile.user.username }}</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #e0f7fa, #f5f6fa); 
+    color: #2f3640;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    padding: 30px;
+  }
+
+  .dashboard-container {
+    width: 95%;
+    max-width: 1000px;
+    background: #ffffff; 
+    padding: 30px;
+    border-radius: 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 25px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+  }
+
+  h1 {
+    grid-column: 1 / -1;
+    text-align: center;
+    font-size: 2.5em;
+    color: #273c75;
+    margin-bottom: 25px;
+  }
+
+  .card {
+    background: #f1f2f6; 
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  }
+
+  .info-label {
+    font-weight: bold;
+    margin-bottom: 10px;
+    font-size: 1.2em;
+    color: #273c75;
+  }
+
+  /* XP Circle */
+  .xp-circle {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: conic-gradient(#44bd32 0%, #dcdde1 0%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-size: 1.5em;
+    color: #2f3640;
+    margin: 0 auto;
+    box-shadow: 0 0 15px #44bd32, 0 0 25px #44bd32 inset;
+    transition: background 2s ease-in-out;
+  }
+
+  /* Skills */
+  .skill {
+    margin-bottom: 15px;
+  }
+
+  .skill-name {
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #44bd32;
+  }
+
+  .skill-bar {
+    background: rgba(0,0,0,0.05);
+    border-radius: 15px;
+    overflow: hidden;
+    height: 20px;
+  }
+
+  .skill-progress {
+    height: 100%;
+    background: #273c75;
+    text-align: right;
+    padding-right: 5px;
+    line-height: 20px;
+    color: white;
+    font-weight: bold;
+    border-radius: 15px;
+    width: 0;
+    transition: width 2s ease;
+  }
+
+  /* Badges */
+  .badges {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+    gap: 10px;
+    margin-top: 10px;
+  }
+
+  .badge {
+    background: linear-gradient(135deg, #ff6fb5, #ff85c1); 
+    color: #fff;
+    padding: 8px 12px;
+    border-radius: 12px;
+    font-weight: bold;
+    font-size: 0.85em;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(255,111,181,0.4);
+    transition: transform 0.3s, box-shadow 0.3s;
+    overflow: hidden;
+  }
+
+  .badge:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 6px 15px rgba(255,111,181,0.6);
+  }
+
+  /* Button Voir Profile */
+  .button-container {
+    grid-column: 1 / -1;
+    text-align: center;
+    margin-top: 25px;
+  }
+
+  a.button-profile {
+    background-color: #ffffff; 
+    color: #ff6fb5; 
+    padding: 12px 30px;
+    border-radius: 12px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.1em;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 10px rgba(255,111,181,0.4);
+  }
+
+  a.button-profile:hover {
+    background-color: #ff6fb5; 
+    color: #ffffff;
+    box-shadow: 0 0 20px rgba(255,111,181,0.6);
+    transform: scale(1.05);
+  }
+
+  @media (max-width: 900px) {
+    .dashboard-container { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="dashboard-container">
+
+  <h1>Dashboard de {{ profile.user.username }}</h1>
+
+  <div class="card">
+    <span class="info-label">XP Total</span>
+    <div class="xp-circle" id="xp-circle">{{ profile.skills_xp|default:"0" }} XP</div>
+  </div>
+
+  <div class="card">
+    <span class="info-label">Compétences</span>
+    {% if skills %}
+      {% for skill in skills %}
+        <div class="skill">
+          <div class="skill-name">{{ skill.name }}</div>
+          <div class="skill-bar">
+            <div class="skill-progress" data-level="{{ skill.level|default:0 }}">{{ skill.level|default:"0" }}%</div>
+          </div>
+        </div>
+      {% endfor %}
+    {% else %}
+      <p>Pas de compétences pour le moment</p>
+    {% endif %}
+  </div>
+
+  <div class="card">
+    <span class="info-label">Badges</span>
+    <div class="badges">
+      {% if profile.badges %}
+        {% for badge in profile.badges.all %}
+          <div class="badge">{{ badge.name }}</div>
+        {% endfor %}
+      {% else %}
+        <div class="badge">Aucun</div>
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="button-container">
+    <a href="{% url 'profile' %}" class="button-profile">Voir Profile</a>
+  </div>
+
+</div>
+
+<script>
+  // XP Circle Animation
+  const xpCircle = document.getElementById('xp-circle');
+  const xp = parseInt("{{ profile.skills_xp|default:'0' }}");
+  let currentXP = 0;
+  const xpInterval = setInterval(() => {
+    if(currentXP >= xp) clearInterval(xpInterval);
+    currentXP++;
+    xpCircle.style.background = `conic-gradient(#44bd32 ${currentXP}%, rgba(0,0,0,0.05) 0)`;
+    xpCircle.textContent = `${currentXP} XP`;
+  }, 10);
+
+  // Skill Bars Animation
+  const skillBars = document.querySelectorAll('.skill-progress');
+  skillBars.forEach(bar => {
+    const level = bar.getAttribute('data-level');
+    setTimeout(() => { bar.style.width = level + '%'; }, 500);
+  });
+</script>
+
+</body>
+</html>
