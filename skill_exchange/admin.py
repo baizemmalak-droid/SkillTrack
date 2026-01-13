@@ -1,5 +1,6 @@
 from django.contrib import admin
-from .models import SkillExchange
+from .models import Skill, SkillRequest
 
-admin.site.register(SkillExchange)
+admin.site.register(Skill)
+admin.site.register(SkillRequest)
 
