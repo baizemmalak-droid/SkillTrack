@@ -6,7 +6,11 @@ import sys
 
 def main():
     """Run administrative tasks."""
+ HEAD
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'skilltrack.settings')
+
+    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'config.settings')
+ 79e646b (Add challenges home page and UI)
     try:
         from django.core.management import execute_from_command_line
     except ImportError as exc:
