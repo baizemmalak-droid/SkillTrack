@@ -3,14 +3,9 @@
 import os
 import sys
 
-
 def main():
     """Run administrative tasks."""
- HEAD
-    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'skilltrack.settings')
-
-    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'config.settings')
- 79e646b (Add challenges home page and UI)
+    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'skilltrack.settings')   
     try:
         from django.core.management import execute_from_command_line
     except ImportError as exc:
@@ -20,7 +15,6 @@ def main():
             "forget to activate a virtual environment?"
         ) from exc
     execute_from_command_line(sys.argv)
-
 
 if __name__ == '__main__':
     main()
