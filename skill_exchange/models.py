@@ -1,13 +1,23 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-class SkillExchange(models.Model):
+class Skill(models.Model):
+    name = models.CharField(max_length=100)
+    description = models.TextField()
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
-    skill_offered = models.CharField(max_length=100)
-    skill_requested = models.CharField(max_length=100)
-    description = models.TextField(blank=True)
-    is_matched = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.name
+
+
+class SkillRequest(models.Model):
+    requester = models.ForeignKey(
+        User,
+        related_name="skill_requests",
+        on_delete=models.CASCADE
+    )
+    skill = models.ForeignKey(Skill, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"{self.skill_offered} -> {self.skill_requested}"
+        return f"{self.requester.username} wants {self.skill.name}"
