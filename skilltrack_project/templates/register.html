@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Inscription - SkillTrack</title>
+    <style>
+        body { font-family: sans-serif; padding: 20px; }
+        form { margin-top: 20px; }
+        p { margin-bottom: 10px; }
+        button { cursor: pointer; padding: 5px 15px; }
+    </style>
+</head>
+<body>
+
+    <h2>Créer un compte étudiant</h2>
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">S'inscrire</button>
+</form>
+
+<p>Tu as déjà un compte ?
+    <a href="{% url 'login' %}">Se connecter</a>
+</p>
+</body>
+</html>
