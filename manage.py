@@ -5,7 +5,11 @@ import sys
 
 def main():
     """Run administrative tasks."""
+<<<<<<< HEAD
+    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'skilltrack_project.settings')
+=======
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'skilltrack.settings')   
+>>>>>>> a1599ee5291d58c2fee55f4039284929daf559aa
     try:
         from django.core.management import execute_from_command_line
     except ImportError as exc:
