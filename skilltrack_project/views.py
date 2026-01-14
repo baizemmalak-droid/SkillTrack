@@ -22,7 +22,7 @@ def register_view(request):
 
 def login_view(request):
     if request.method == 'POST':
-        form = AuthenticationForm(data=request.POST)
+        form = AuthenticationForm(request, data=request.POST)  # ✅ ICI
         if form.is_valid():
             user = form.get_user()
             login(request, user)
@@ -31,6 +31,7 @@ def login_view(request):
         form = AuthenticationForm()
 
     return render(request, 'login.html', {'form': form})
+
 
 
 def logout_view(request):
