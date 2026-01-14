@@ -1,16 +1,28 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
     <title>Login</title>
 </head>
 <body>
-    <h1>Login Page</h1>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Login</button>
-    </form>
+
+<h2>Login</h2>
+
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Login</button>
+</form>
+
+{% if form.errors %}
+<p style="color:red;">Nom d’utilisateur ou mot de passe incorrect</p>
+{% endif %}
+
+<p>
+    Pas encore inscrit ?
+    <a href="{% url 'register' %}">S'inscrire ici</a>
+</p>
+
 </body>
 </html>
-<p>Vous n'avez pas de compte ? <a href="{% url 'register' %}">S'inscrire ici</a></p>
+
+
