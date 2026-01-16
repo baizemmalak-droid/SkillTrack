@@ -15,7 +15,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'students',  # ⚡ app ديالنا
+    'students',  
 ]
 
 MIDDLEWARE = [
@@ -28,7 +28,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'skilltrack.urls'  # ⚡ صغير
+ROOT_URLCONF = 'skilltrack.urls'  
 
 TEMPLATES = [
     {
