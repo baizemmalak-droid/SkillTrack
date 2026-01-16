@@ -3,15 +3,18 @@ from django.contrib.auth.decorators import login_required
 from .models import Profile
 from .forms import ProfileForm
 
+
 @login_required
 def dashboard_view(request):
     profile, created = Profile.objects.get_or_create(user=request.user)
     return render(request, 'students/dashboard.html', {'profile': profile})
 
+
 @login_required
 def profile_view(request):
     profile, created = Profile.objects.get_or_create(user=request.user)
     return render(request, 'students/profile.html', {'profile': profile})
+
 
 @login_required
 def edit_profile(request):
@@ -26,4 +29,3 @@ def edit_profile(request):
         form = ProfileForm(instance=profile)
 
     return render(request, 'students/edit_profile.html', {'form': form})
-    
