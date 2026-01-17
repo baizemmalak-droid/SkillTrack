@@ -18,6 +18,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'students',  
+    'skill_exchange',
+    'challenges',
+     
 ]
 
 MIDDLEWARE = [
