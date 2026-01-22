@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SkillTrack | Register</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #0f172a, #1e293b);
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        /* ===== BACKGROUND EFFECT ===== */
+        .bg-circle {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(120px);
+            opacity: 0.6;
+            z-index: -1;
+        }
+
+        .circle-blue {
+            width: 400px;
+            height: 400px;
+            background: #3b82f6;
+            top: -100px;
+            left: -100px;
+        }
+
+        .circle-pink {
+            width: 450px;
+            height: 450px;
+            background: #ec4899;
+            bottom: -150px;
+            right: -150px;
+        }
+
+        /* ===== NAVBAR ===== */
+        nav {
+            padding: 20px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav h2 {
+            font-size: 26px;
+            font-weight: bold;
+            background: linear-gradient(90deg, #3b82f6, #ec4899);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            margin-left: 25px;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: #ec4899;
+        }
+
+        /* ===== REGISTER CONTAINER ===== */
+        .register-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: calc(100vh - 180px);
+            padding: 40px 20px;
+        }
+
+        .register-card {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(12px);
+            padding: 50px 40px;
+            border-radius: 20px;
+            width: 100%;
+            max-width: 450px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .register-card h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 32px;
+        }
+
+        .register-card span {
+            background: linear-gradient(90deg, #3b82f6, #ec4899);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .register-subtitle {
+            text-align: center;
+            color: #cbd5f5;
+            margin-bottom: 30px;
+            font-size: 16px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        input {
+            margin-bottom: 20px;
+            padding: 16px 20px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            outline: none;
+            font-size: 15px;
+            background: rgba(255, 255, 255, 0.05);
+            color: #fff;
+            transition: 0.3s;
+        }
+
+        input:focus {
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+        }
+
+        input::placeholder {
+            color: #94a3b8;
+        }
+
+        /* ===== CHECKBOX TERMS ===== */
+        .terms-container {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin: 15px 0 25px;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .terms-container input[type="checkbox"] {
+            margin-top: 4px;
+            margin-bottom: 0;
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+
+        .terms-label {
+            font-size: 14px;
+            color: #cbd5f5;
+            line-height: 1.5;
+        }
+
+        .terms-label a {
+            color: #3b82f6;
+            text-decoration: none;
+        }
+
+        .terms-label a:hover {
+            color: #ec4899;
+            text-decoration: underline;
+        }
+
+        /* ===== BUTTONS ===== */
+        .btn-register {
+            margin-top: 10px;
+            padding: 16px;
+            border-radius: 30px;
+            border: none;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            background: linear-gradient(90deg, #3b82f6, #ec4899);
+            color: #fff;
+            transition: all 0.3s ease;
+        }
+
+        .btn-register:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(236,72,153,0.4);
+        }
+
+        .login-link {
+            text-align: center;
+            margin-top: 25px;
+            font-size: 15px;
+            color: #cbd5f5;
+        }
+
+        .login-link a {
+            color: #3b82f6;
+            text-decoration: none;
+            font-weight: 500;
+            margin-left: 5px;
+        }
+
+        .login-link a:hover {
+            color: #ec4899;
+            text-decoration: underline;
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: #94a3b8;
+            font-size: 14px;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media(max-width: 768px) {
+            nav {
+                padding: 20px 30px;
+            }
+            
+            .register-card {
+                padding: 40px 30px;
+                margin: 0 20px;
+            }
+            
+            .register-card h1 {
+                font-size: 28px;
+            }
+        }
+
+        @media(max-width: 480px) {
+            nav {
+                flex-direction: column;
+                gap: 15px;
+                padding: 20px;
+            }
+            
+            nav h2 {
+                margin-bottom: 10px;
+            }
+            
+            .register-card {
+                padding: 35px 25px;
+            }
+            
+            input {
+                padding: 14px 16px;
+            }
+            
+            .terms-container {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="bg-circle circle-blue"></div>
+<div class="bg-circle circle-pink"></div>
+
+<nav>
+    <h2>SkillTrack</h2>
+    <div>
+        <a href="{% url 'home' %}">Home</a>
+        <a href="{% url 'login' %}">Log In</a>
+    </div>
+</nav>
+
+<div class="register-container">
+    <div class="register-card">
+        <h1>Create an <span>account</span></h1>
+        <p class="register-subtitle">
+            Join SkillTrack to track and develop your skills
+        </p>
+
+      {% if messages %}
+    {% for message in messages %}
+        {% if message.tags == 'error' %}
+            <p style="color:#f87171; text-align:center; margin-bottom:15px;">
+                {{ message }}
+            </p>
+        {% else %}
+            <p style="color:#4ade80; text-align:center; margin-bottom:15px;">
+                {{ message }}
+            </p>
+        {% endif %}
+    {% endfor %}
+{% endif %}
+
+       
+
+        <form method="post">
+            {% csrf_token %}
+            <input type="text" name="username" placeholder="Username" required>
+            <input type="email" name="email" placeholder="Email address" required>
+            <input type="password" name="password1" placeholder="Password" required>
+            <input type="password" name="password2" placeholder="Confirm Password" required>
+            
+            <div class="terms-container">
+                <input type="checkbox" id="terms" name="terms" required>
+                <label for="terms" class="terms-label">
+                    I accept the 
+                    <a href="#">terms of service</a> and 
+                    <a href="#">privacy policy</a> of SkillTrack
+                </label>
+            </div>
+
+            <button type="submit" class="btn-register">Sign Up</button>
+        </form>
+
+
+        <div class="login-link">
+            Already have an account?
+            <a href="{% url 'login' %}">Log In</a>
+        </div>
+    </div>
+</div>
+
+<footer>
+    © 2026 SkillTrack · Academic Project
+</footer>
+
+</body>
+</html>
+
