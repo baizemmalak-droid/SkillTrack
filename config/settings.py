@@ -18,13 +18,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
 
-    'django.contrib.staticfiles',
 
     'user_auth_home',
     
     'django.contrib.staticfiles', 
     'dashboard',
     'profile_app',
+    'skill_exchange',
 
 
 
