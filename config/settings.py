@@ -17,15 +17,14 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-<<<<<<< HEAD
+
     'django.contrib.staticfiles',
     'user_auth_home',
     
-=======
     'django.contrib.staticfiles', 
     'dashboard',
     'profile_app',
->>>>>>> origin/User-profile-dashboard
+
 ]
 
 MIDDLEWARE = [
