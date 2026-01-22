@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}{{ challenge.title }}{% endblock %}
+
+{% block content %}
+<div class="container">
+  <h1>{{ challenge.title }}</h1>
+  <p>{{ challenge.description }}</p>
+  <p>{{ challenge.points }} pts</p>
+
+  {% if not unlocked %}
+    <p style="color:red;">🔒 This challenge is locked.</p>
+
+  {% elif submission %}
+    {% if submission.is_approved %}
+      <p style="color:lime;">✅ You passed this challenge!</p>
+    {% else %}
+      <p style="color:orange;">⏳ Submitted — waiting for approval.</p>
+    {% endif %}
+
+  {% else %}
+    <form method="post" action="{% url 'skilltrack_challenges:submit_challenge' challenge.id %}">
+      {% csrf_token %}
+      <textarea name="solution" rows="6" required placeholder="Write your solution here..."></textarea>
+      <br><br>
+      <button type="submit" class="btn-view">Submit</button>
+    </form>
+  {% endif %}
+
+  <br>
+  <a href="{% url 'skilltrack_challenges:challenges_list' %}">⬅ Back</a>
+</div>
+{% endblock %}

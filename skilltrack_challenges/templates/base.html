@@ -1,0 +1,32 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+  <title>SkillTrack</title>
+  <link rel="stylesheet" href="{% static 'css/base.css' %}">
+</head>
+<body>
+
+<nav class="navbar">
+  <h2 class="logo-glow">SkillTrack</h2>
+  <div class="nav-links">
+    <a href="{% url 'skilltrack_challenges:challenges_list' %}" class="nav-btn">Challenges</a>
+    <a href="{% url 'skilltrack_challenges:leaderboard' %}" class="nav-btn">Leaderboard</a>
+    <a href="{% url 'skilltrack_challenges:my_badges' %}" class="nav-btn">Badges</a>
+  </div>
+</nav>
+
+<div class="container">
+  {% block content %}{% endblock %}
+</div>
+
+</body>
+</html>
+
+
+
+
+
+
+
+

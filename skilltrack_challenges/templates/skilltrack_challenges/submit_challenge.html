@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}Submit Challenge{% endblock %}
+
+{% block content %}
+<div class="container">
+  <h1>{{ challenge.title }}</h1>
+
+  {% if submission %}
+    <p>✅ You already submitted this challenge.</p>
+  {% else %}
+    <form method="post">
+      {% csrf_token %}
+      <textarea name="solution" rows="6" placeholder="Write your solution here..." required></textarea>
+      <br><br>
+      <button type="submit" class="btn-view">Submit</button>
+    </form>
+  {% endif %}
+
+  <br>
+  <a href="{% url 'skilltrack_challenges:challenge_detail' challenge.id %}">⬅ Back</a>
+</div>
+{% endblock %}
