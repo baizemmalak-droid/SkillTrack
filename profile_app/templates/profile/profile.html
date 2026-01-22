@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Profile | SkillTrack</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #0f172a, #1e293b);
+            color: #e5e7eb;
+        }
+
+        header {
+            width: 100%;
+            padding: 18px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(10px);
+        }
+
+        .logo {
+            font-size: 26px;
+            font-weight: 800;
+            background: linear-gradient(90deg, #38bdf8, #a855f7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-links a {
+            margin-left: 22px;
+            text-decoration: none;
+            color: #e5e7eb;
+            font-weight: 500;
+        }
+
+        .logout-btn {
+            padding: 8px 18px;
+            border-radius: 999px;
+            border: 2px solid #f472b6;
+            color: #f472b6 !important;
+        }
+
+        .profile-container {
+            max-width: 1000px;
+            margin: auto;
+            padding: 70px 20px;
+        }
+
+        h1 {
+            font-size: 42px;
+            font-weight: 800;
+            margin-bottom: 25px;
+            background: linear-gradient(90deg, #38bdf8, #a855f7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.06);
+            border-radius: 18px;
+            padding: 26px;
+            margin-bottom: 30px;
+        }
+
+        h2 {
+            margin-bottom: 10px;
+        }
+
+        .back-btn {
+            display: inline-block;
+            padding: 12px 30px;
+            border-radius: 999px;
+            background: linear-gradient(90deg, #38bdf8, #a855f7);
+            color: #020617;
+            text-decoration: none;
+            font-weight: 600;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">SkillTrack</div>
+    <nav class="nav-links">
+        <a href="/">Home</a>
+        <a href="/skills/">My Skills</a>
+        <a href="/profile/">Profile</a>
+        <a href="/challenges/">Challenges</a>
+        <a href="{% url 'logout' %}" class="logout-btn">Logout</a>
+    </nav>
+</header>
+
+<div class="profile-container">
+
+    <h1>My Profile</h1>
+
+    <!-- USER INFO -->
+    <div class="card">
+        <p>
+            <strong>Username:</strong> {{ user.username }}<br>
+            <strong>Email:</strong> {{ user.email }}
+        </p>
+    </div>
+
+    <!-- PRESENTATION -->
+    <div class="card">
+        <h2>Presentation</h2>
+        <p>
+            Welcome to your professional profile on SkillTrack.
+            This space reflects your academic background,
+            your skills, and your challenge achievements.
+        </p>
+    </div>
+
+    <!-- SKILLS -->
+    <div class="card">
+        <h2>Skills</h2>
+
+        {% if skills %}
+            <ul>
+                {% for skill in skills %}
+                    <li>{{ skill.name }}</li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>
+                Your validated skills and those under development
+                will appear here progressively.
+            </p>
+        {% endif %}
+    </div>
+
+    <!-- CHALLENGES -->
+    <div class="card">
+        <h2>Challenges & Achievements</h2>
+
+        {% if challenges %}
+            <ul>
+                {% for challenge in challenges %}
+                    <li>{{ challenge.title }}</li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>
+                Your participation history in challenges
+                will be displayed automatically.
+            </p>
+        {% endif %}
+    </div>
+
+    <!-- REPUTATION -->
+    <div class="card">
+        <h2>Reputation & Validation</h2>
+        <p>
+            Badges, evaluations and validations
+            will appear after community interaction.
+        </p>
+    </div>
+
+    <a href="/dashboard/" class="back-btn">Back to Dashboard</a>
+
+</div>
+
+</body>
+</html>
