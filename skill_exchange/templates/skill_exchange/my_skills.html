@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Skills</title>
+</head>
+<body>
+
+<h2>My Skills</h2>
+
+{% if user_skills %}
+    <ul>
+        {% for s in user_skills %}
+            <li>
+                {{ s.skill.name }} - {{ s.level }}
+            </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No skills added yet.</p>
+{% endif %}
+
+<br>
+<a href="{% url 'add_skill' %}">Add Skill</a><br>
+<a href="{% url 'dashboard' %}">Back to Dashboard</a>
+
+</body>
+</html>

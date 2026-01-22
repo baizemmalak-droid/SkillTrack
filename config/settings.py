@@ -19,17 +19,17 @@ INSTALLED_APPS = [
     'django.contrib.messages',
 
     'django.contrib.staticfiles',
-<<<<<<< HEAD
+
     'user_auth_home',
     
     'django.contrib.staticfiles', 
     'dashboard',
     'profile_app',
 
-=======
+
 
     'skilltrack_challenges.apps.SkilltrackChallengesConfig',
->>>>>>> origin/skilltrack_challenges
+
 ]
 
 MIDDLEWARE = [
@@ -81,13 +81,13 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_TZ = True
 
-<<<<<<< HEAD
+
 STATIC_URL = 'static/'
-=======
+
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [BASE_DIR / 'static']
->>>>>>> origin/skilltrack_challenges
+

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Skill</title>
+</head>
+<body>
+
+<h2>Add a New Skill</h2>
+
+{% if messages %}
+    {% for message in messages %}
+        <p>{{ message }}</p>
+    {% endfor %}
+{% endif %}
+
+<form method="POST">
+    {% csrf_token %}
+
+    <label>Skill:</label>
+    <select name="skill" required>
+        <option value="">-- Select skill --</option>
+        {% for skill in skills %}
+            <option value="{{ skill.id }}">{{ skill.name }}</option>
+        {% endfor %}
+    </select>
+
+    <br><br>
+
+    <label>Level:</label>
+    <select name="level" required>
+        <option value="">-- Select level --</option>
+        <option value="Beginner">Beginner</option>
+        <option value="Intermediate">Intermediate</option>
+        <option value="Advanced">Advanced</option>
+    </select>
+
+    <br><br>
+
+    <button type="submit">Save</button>
+</form>
+
+<br>
+<a href="{% url 'my_skills' %}">Back to My Skills</a>
+
+</body>
+</html>
