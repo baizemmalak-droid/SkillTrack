@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block title %}Locked{% endblock %}
+
+{% block content %}
+<h2>🔒 Locked Challenge</h2>
+<p>You must complete the previous level before accessing this challenge.</p>
+<a href="{% url 'skilltrack_challenges:challenges_list' %}">← Back to challenges</a>
+{% endblock %}
+
+

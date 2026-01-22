@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}Unlocked{% endblock %}
+
+{% block content %}
+<div class="form-card center">
+  <div class="unlock-banner">🎉 Challenge Unlocked!</div>
+  <h2>{{ challenge.title }}</h2>
+  <p>You earned {{ challenge.points }} points 💜</p>
+
+  <a href="{% url 'skilltrack_challenges:challenges_list' %}">
+    <button class="btn-gradient">Back to Challenges</button>
+  </a>
+</div>
+{% endblock %}

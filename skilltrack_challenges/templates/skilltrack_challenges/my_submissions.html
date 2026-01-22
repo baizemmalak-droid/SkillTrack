@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}My Submissions{% endblock %}
+
+{% block content %}
+<h1>My Submissions</h1>
+
+<ul>
+  {% for sub in submissions %}
+    <li>{{ sub.challenge.title }} — {{ sub.submitted_at }}</li>
+  {% empty %}
+    <li>No submissions yet.</li>
+  {% endfor %}
+</ul>
+
+<a href="{% url 'skilltrack_challenges:challenges_list' %}">Back to challenges</a>
+{% endblock %}

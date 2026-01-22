@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}Leaderboard{% endblock %}
+
+{% block content %}
+<div class="container">
+  <h1>🏆 Leaderboard</h1>
+
+  <div class="glass-section">
+    {% for user in users %}
+      <div class="leaderboard-card">
+        <div class="rank">#{{ forloop.counter }}</div>
+        <div>{{ user.username }}</div>
+        <div><b>{{ user.userprofile.points }}</b> pts</div>
+      </div>
+    {% empty %}
+      <p>No users yet.</p>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

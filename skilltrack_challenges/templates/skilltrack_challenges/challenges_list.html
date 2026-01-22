@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block title %}Challenges{% endblock %}
+
+{% block content %}
+<div class="container">
+
+  <h1 class="page-title">Challenges</h1>
+
+  {% for skill, challenges in grouped_challenges.items %}
+    <h2 class="skill-title">✨ {{ skill }}</h2>
+
+    <div class="challenge-grid">
+      {% for challenge in challenges %}
+        <div class="glass-card">
+
+          {% if not challenge.unlocked %}
+            <div class="locked-badge">🔒 Locked</div>
+          {% endif %}
+
+          <h3>{{ challenge.title }}</h3>
+          <p class="challenge-meta">{{ challenge.level }}</p>
+          <p class="challenge-points">{{ challenge.points }} pts</p>
+
+          {% if challenge.unlocked %}
+            <a href="{% url 'skilltrack_challenges:challenge_detail' challenge.id %}" class="btn-view">View</a>
+          {% endif %}
+
+          {% if challenge.submission %}
+            {% if challenge.submission.is_approved %}
+              <p class="status-approved">✅ Passed</p>
+            {% else %}
+              <p class="status-pending">⏳ Pending</p>
+            {% endif %}
+          {% endif %}
+
+        </div>
+      {% endfor %}
+    </div>
+  {% endfor %}
+
+</div>
+{% endblock %}
+

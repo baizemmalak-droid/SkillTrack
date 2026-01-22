@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}My Badges{% endblock %}
+
+{% block content %}
+<h1 class="page-title">🏅 My Badges</h1>
+
+<div class="glass-section">
+  {% for badge in badges %}
+    <div class="leaderboard-card">
+      <div>{{ badge.badge.name }}</div>
+      <div>{{ badge.badge.description }}</div>
+    </div>
+  {% empty %}
+    <p class="center">You don't have any badges yet.</p>
+  {% endfor %}
+</div>
+{% endblock %}
