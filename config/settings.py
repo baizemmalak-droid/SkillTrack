@@ -91,3 +91,8 @@ STATIC_URL = 'static/'
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [BASE_DIR / 'static']
 
+# Durée des sessions : 60 jours
+SESSION_COOKIE_AGE = 60 * 60 * 24 * 60  # 60 jours en secondes
+
+# Ne pas fermer la session à la fermeture du navigateur
+SESSION_EXPIRE_AT_BROWSER_CLOSE = False

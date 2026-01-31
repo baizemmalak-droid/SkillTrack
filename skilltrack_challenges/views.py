@@ -5,7 +5,6 @@ from collections import defaultdict
 
 from .models import Challenge, ChallengeSubmission, UserBadge
 
-
 # ---------- HELPERS ----------
 def is_unlocked(user, challenge):
     if challenge.level == "easy":
@@ -70,7 +69,6 @@ def challenge_detail(request, challenge_id):
         "unlocked": unlocked,
     })
 
-
 # ---------- SUBMIT ----------
 @login_required
 def submit_challenge(request, challenge_id):
@@ -81,17 +79,30 @@ def submit_challenge(request, challenge_id):
         challenge=challenge
     ).first()
 
-    if request.method == "POST" and not submission:
-        solution = request.POST.get("solution")
+    if request.method == "POST":
+        solution = request.POST.get("solution", "").strip()
 
-        ChallengeSubmission.objects.create(
-            user=request.user,
-            challenge=challenge,
-            solution=solution,
-            is_approved=False
-        )
+        from .validators import validate_solution
+        passed = validate_solution(challenge, solution)
 
-    return redirect("skilltrack_challenges:challenge_detail", challenge_id=challenge.id)
+        if submission:
+            # 🔁 UPDATE (Try again)
+            submission.solution = solution
+            submission.is_approved = passed
+            submission.save()
+        else:
+            # 🆕 FIRST SUBMISSION
+            ChallengeSubmission.objects.create(
+                user=request.user,
+                challenge=challenge,
+                solution=solution,
+                is_approved=passed
+            )
+
+    return redirect(
+        "skilltrack_challenges:challenge_detail",
+        challenge_id=challenge.id
+    )
 
 
 # ---------- LEADERBOARD ----------
@@ -101,6 +112,7 @@ def leaderboard(request):
     return render(request, "skilltrack_challenges/leaderboard.html", {
         "users": users
     })
+
 
 # ---------- BADGES ----------
 @login_required

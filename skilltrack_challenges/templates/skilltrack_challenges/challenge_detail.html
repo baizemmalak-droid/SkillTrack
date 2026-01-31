@@ -14,15 +14,23 @@
     {% if submission.is_approved %}
       <p style="color:lime;">✅ You passed this challenge!</p>
     {% else %}
-      <p style="color:orange;">⏳ Submitted — waiting for approval.</p>
+      <p style="color:red;">❌ Your solution did not pass. Try again.</p>
+
+      <form method="post" action="{% url 'skilltrack_challenges:submit_challenge' challenge.id %}">
+        {% csrf_token %}
+        <textarea name="solution" rows="6" required></textarea>
+        <br><br>
+        <button type="submit">Try Again</button>
+      </form>
     {% endif %}
 
   {% else %}
+    <!-- 🔥 CE CAS MANQUAIT -->
     <form method="post" action="{% url 'skilltrack_challenges:submit_challenge' challenge.id %}">
       {% csrf_token %}
-      <textarea name="solution" rows="6" required placeholder="Write your solution here..."></textarea>
+      <textarea name="solution" rows="6" required></textarea>
       <br><br>
-      <button type="submit" class="btn-view">Submit</button>
+      <button type="submit">Submit</button>
     </form>
   {% endif %}
 
@@ -30,3 +38,4 @@
   <a href="{% url 'skilltrack_challenges:challenges_list' %}">⬅ Back</a>
 </div>
 {% endblock %}
+

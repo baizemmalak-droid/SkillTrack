@@ -2,27 +2,142 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>My Skills</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventory | SkillTrack</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0f172a;
+            --primary: #3b82f6;
+            --secondary: #ec4899;
+            --highlight: #fcd34d;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: var(--bg);
+            color: #fff;
+            font-family: 'Outfit', sans-serif;
+            min-height: 100vh;
+        }
+
+        nav {
+            padding: 30px 60px;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: #94a3b8;
+            font-weight: 600;
+        }
+
+        .container {
+            max-width: 800px;
+            width: 90%;
+            margin: 40px auto;
+        }
+
+        h1 {
+            font-size: 38px;
+            font-weight: 800;
+            margin-bottom: 40px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .skill-card {
+            background: rgba(30, 41, 59, 0.5);
+            padding: 25px;
+            border-radius: 20px;
+            margin-bottom: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: 0.3s;
+        }
+
+        .skill-card:hover {
+            transform: scale(1.02);
+            border-color: var(--primary);
+            background: rgba(30, 41, 59, 0.8);
+        }
+
+        .card-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .skill-name {
+            font-size: 20px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .skill-lvl {
+            font-size: 11px;
+            font-weight: 800;
+            padding: 4px 12px;
+            border-radius: 50px;
+            background: rgba(252, 211, 77, 0.1);
+            color: var(--highlight);
+            border: 1px solid var(--highlight);
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            box-shadow: 0 0 10px var(--primary);
+            transition: 1s ease-out;
+        }
+
+        .empty {
+            text-align: center;
+            margin-top: 100px;
+            color: #94a3b8;
+        }
+    </style>
 </head>
 <body>
-
-<h2>My Skills</h2>
-
-{% if user_skills %}
-    <ul>
-        {% for s in user_skills %}
-            <li>
-                {{ s.skill.name }} - {{ s.level }}
-            </li>
-        {% endfor %}
-    </ul>
-{% else %}
-    <p>No skills added yet.</p>
-{% endif %}
-
-<br>
-<a href="{% url 'add_skill' %}">Add Skill</a><br>
-<a href="{% url 'dashboard' %}">Back to Dashboard</a>
-
+    <nav>
+        <a href="/dashboard/" class="nav-link">Dashboard</a>
+    </nav>
+    
+    <div class="container">
+        <h1>Skill Inventory</h1>
+        
+        {% if user_skills %}
+            {% for us in user_skills %}
+            <div class="skill-card">
+                <div class="card-top">
+                    <span class="skill-name">{{ us.skill.name }}</span>
+                    <span class="skill-lvl">{{ us.level }}</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="fill" style="width: {% if us.level == 'Beginner' %}33%{% elif us.level == 'Intermediate' %}66%{% else %}100%{% endif %}"></div>
+                </div>
+            </div>
+            {% endfor %}
+        {% else %}
+            <div class="empty">
+                <p>No data found. Start adding skills.</p>
+            </div>
+        {% endif %}
+    </div>
 </body>
 </html>
